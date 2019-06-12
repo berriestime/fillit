@@ -6,7 +6,7 @@
 /*   By: selly <selly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 15:07:15 by selly             #+#    #+#             */
-/*   Updated: 2019/06/05 13:53:32 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/05 16:36:24 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int		type_b(char *str, int i, int line)
 	return (-1);
 }
 
-int		type_a(char *str, int i, int line, int type)
+int		type_a(char *str, int i, int line, int a)
 {
-	type = i;
+	a = i;
 	if (i >= 0 && i < 4)
 	{
 		while (str[i] == '#' && i < 19)
@@ -114,7 +114,7 @@ int		type_a(char *str, int i, int line, int type)
 		if (line == 0)
 			return (1);
 	}
-	i = type;
+	i = a;
 	line = check_symbol(str, 4, 1, i);
 	if (line == 0)
 		return (2);
