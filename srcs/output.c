@@ -6,16 +6,11 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:45:55 by selly             #+#    #+#             */
-/*   Updated: 2019/06/12 16:47:50 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:07:50 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+#include "../includes/tetriminos.h"
 
 int		line_begin(int c, int size, int step)
 {

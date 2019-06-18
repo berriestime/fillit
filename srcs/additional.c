@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   additional.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/04 13:57:57 by kturnips          #+#    #+#             */
-/*   Updated: 2019/06/12 16:47:46 by selly            ###   ########.fr       */
+/*   Created: 2019/06/18 17:08:42 by selly             #+#    #+#             */
+/*   Updated: 2019/06/18 17:27:05 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	unsigned int index;
+#include "../includes/tetriminos.h"
 
-	index = 0;
-	while (src[index] != '\0')
-	{
-		dest[index] = src[index];
-		index++;
-	}
-	dest[index] = src[index];
-	return (dest);
+int		max_step(int c, int step, int size)
+{
+	if ((c == 1 || c == 2) && step > (size - 4 + 1) * size)
+		return (1);
+	return (0);
 }

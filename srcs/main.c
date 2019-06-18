@@ -6,7 +6,7 @@
 /*   By: selly <selly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 08:17:01 by dmorrige          #+#    #+#             */
-/*   Updated: 2019/06/12 13:41:23 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:01:46 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ unsigned int	tetr_parser(char *a)
 	return (0);
 }
 
-void			ft_tetr_validation(int fd, unsigned int tetrs[MAX_TETRS + 1])
+void			ft_tetr_validation(int fd, int tetrs[MAX_TETRS + 1])
 {
-	unsigned int	tmp_tetr;
+	int				tmp_tetr;
 	size_t			len;
 	size_t			red_mem;
 	char			buff[VALID_TTR_SYM_COUNT + 2];
@@ -65,12 +65,13 @@ void			ft_tetr_validation(int fd, unsigned int tetrs[MAX_TETRS + 1])
 	if (red_mem != 20 || len > 26)
 		ft_invalid_tetr();
 	tetrs[len + 1] = 0;
+	tetr_line(tetrs, 4, 0);
 }
 
 int				main(int argc, char const **argv)
 {
-	unsigned int	tetriminos[MAX_TETRS + 1];
-	int				fd;
+	int			tetriminos[MAX_TETRS + 1];
+	int			fd;
 
 	if (argc != 2)
 	{

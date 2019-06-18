@@ -6,129 +6,94 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:45:10 by selly             #+#    #+#             */
-/*   Updated: 2019/06/12 16:47:39 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/18 16:54:47 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "../includes/tetriminos.h"
 
-int	figura(char c, int size, int *step, char **line);
-void	output(char *s, int size);
-
- void    *ft_memset(void *s, int c, size_t n)
+char    *fill_alpha(char *dest, char **line, int i)
 {
-	while (n-- != 0)
-		((unsigned char *)s)[n] = (unsigned char)c;
-	return (s);
+    char *alpha;
+    char *buf;
+
+    alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    buf = *line;
+    while (*buf)
+    {
+        if (*buf == '#')
+            *buf = alpha[i];
+        buf++;
+    }
+    return(ft_strcpy(dest, *line));
 }
 
-char    *ft_strcpy(char *dest, char *src)
+int     count_tetr(int *c)
 {
-	unsigned int index;
-	
-	index = 0;
-	while (src[index] != '\0')
-	{
-		dest[index] = src[index];
-		index++;
-	}
-	dest[index] = src[index];
-	return (dest);
-}
+    int i;
 
-int     line_tetr(int c, char **solve, int size, int *step)
+    i = 0;
+    while (c[i] > 0 && c[i] < 20)
+        i++;
+    return (i);
+}
+int     line_tetr(int *c, char **solve, int size, int step)
 {
     int i;
     char *line;
-	int		n; //number of tetr
+    char *buf;
+    int n;
+    int m;
 
     i = 0;
+    n = 0;
     if (!(line = (char *)malloc(sizeof(char) * (size * size) + 1)))
      return (-3);
     ft_memset(line, '.', size * size);
     line[size * size] = '\0';
-   // i = figura(c, size, &(*step), &line);
-   	output(line, size);
-    /*
-    while (i < size)
+    m = count_tetr(c);
+    while (i < m)
     {
-		if((figura(c[i], size, &(*step), &line) = n) > 0)
-		{
-			*solve = ft_strcpy(*solve, line);
+		if((n = figura(c[i], size, step, &line)) == 1)
+		{       
+            
+			*solve = fill_alpha(*solve, &line, i);
+            step = 0;
+            i++;
 		}
+		else if (n == -1)
+        {
+            line = ft_strcpy(line, *solve);
+			step++;
+        }
 		else if (n == -2)
-
+        {
+            free(line);
+            return(-1);
+        }
     }
-    free(line);
-    step = 0;*/
     return (1);
 }
 
-int     find_solution(char **solve, int *c, int size)
-{
-    int     i;
-    int     step;
-    int     test;
-
-    i = 0;
-    step = 10;
-    test = 0;
-    test = line_tetr(c[0], &(*solve), size, &step);
-    return (0);
-    /*
-    while (i < size)
-    {
-        if (test = line_tetr(c[i], solve, size, &step) && step == 0)
-         i++;
-        else if (step > 0)
-        {
-            while (step > 0)
-                test = line_tetr(c[i], solve, size, &step);
-            if (!test && i != 0)
-            {
-                i--;
-                step = 0;
-            }
-            else
-             i++;
-        }
-        else
-            return (-1);
-    }
-    return (1);*/
-}
-
-void    tetr_line(int *c, int size)
+void    tetr_line(int *c, int size, int step)
 {
     char *solve;
+    int     test;
 
+    test = 0;
     if (!(solve = (char *)malloc(sizeof(char) * (size * size + 1))))
      return ;
     ft_memset(solve, '.', size * size);
     solve[size * size] = '\0';
-    //printf("%s solve \n", solve);
-    int a = find_solution(&solve, c, size);
-    /*
-    if (!(find_soluton(&solve, c, size)))
+    test = line_tetr(c, &solve, size, step);
+    if (test < 0)
     {
         free(solve);
-        tetr_line(c, (size + 1));
+        tetr_line(c, (size + 1), 0);
     }
     else
     {
-        get_solution(solve, size);
+        output(solve, size);
         free(solve);
-    }*/
-}
-
-int	main(void)
-{
-	int tetr[3] = {2, 1, 10};
-	int i = 0;
-	while (i < 3)
-		printf("%d\n", tetr[i++]);
-	printf("--------\n");
-	tetr_line(tetr, 5);
-	return (0);
+    }
 }

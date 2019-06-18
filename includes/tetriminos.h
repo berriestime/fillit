@@ -6,7 +6,7 @@
 /*   By: dmorrige <dmorrige@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 08:21:13 by dmorrige          #+#    #+#             */
-/*   Updated: 2019/06/05 14:32:40 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:27:10 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define MAX_SQUARE 16
 # define VALID_TTR_SYM_COUNT 20
 
+
 int				main(int argc, char const **argv);
 int				tetrimino(char *str);
 int				type_a(char *str, int i, int line, int type);
@@ -28,5 +29,16 @@ int				type_c(char *str, int i, int line, int a);
 int				type_d(char *str, int i, int line, int a);
 int				type_f(char *str, int i, int line, int a);
 int				check_symbol(char *s, int l, int st, int i);
+int				figura(char c, int size, int step, char **line);
+int				square_begin(int size, int step);
+int				hor_begin(int size, int step);
+int				hor_e(int c, int size, int step, char **line);
+int				vert_e(int c, int size, int step, char **line);
+int				hor_f(int c, int size, int step, char **line);
+int				vert_f(int c, int size, int step, char **line);
+int				line_begin(int c, int size, int step);
+int				max_step(int c, int step, int size);
+void			output(char *s, int size);
+void			tetr_line(int *c, int size, int step);
 
 #endif

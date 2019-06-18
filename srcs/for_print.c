@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   for_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:46:14 by selly             #+#    #+#             */
-/*   Updated: 2019/06/12 16:47:43 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:18:58 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	hor_begin(int size, int step)
 {
@@ -64,7 +62,7 @@ int    square_begin(int size, int step)
         return (i);
 }
 
-int	hor_e(int c, int size, int *step, char **line)
+int	hor_e(int c, int size, int step, char **line)
 {
 	char *tetr;
 	int i;
@@ -72,35 +70,28 @@ int	hor_e(int c, int size, int *step, char **line)
 
 	tetr = *line;
 	len = 4;
-	if (*step >= (size - 1) * (size - 2))
-			return (-1);
-	i = hor_begin(size, *step);
-	printf("%d i\n", i);
+	if (step >= (size - 1) * (size - 2))
+			return (-2);
+	i = hor_begin(size, step);
 	if (c == 12)
 	{
-		while (tetr[i] && len)
+		while (tetr[i] == '.' && len)
 		{
-			if (tetr[i] == '.')
-			{
-				tetr[i] = 'E';
-				len--;
-			}
+			tetr[i] = '#';
+			len--;
 			if (len == 2)
-			 i += size;
-			 else
+			i += size;
+			else
 			 i++;
 		}
 	}
 	if (c == 13)
 	{
 		i += size;
-		while (tetr[i] && len)
+		while (tetr[i] == '.' && len)
 		{
-			if (tetr[i] == '.')
-			{
-				tetr[i] = 'E';
-				len--;
-			}
+			tetr[i] = '#';
+			len--;
 			if (len == 2)
 				i -= size;
 			else
@@ -112,28 +103,24 @@ int	hor_e(int c, int size, int *step, char **line)
 	return (-1);
 }
 
-int	vert_e(int c, int size, int *step, char **line)
+int	vert_e(int c, int size, int step, char **line)
 {
 	char *tetr;
 	int i;
 	int len;
 
-	if (*step >= (size - 1) * (size - 2))
-                        return (-1);
-	i = square_begin(size, *step);
-        printf("%d our i\n", i);
+	if (step >= (size - 1) * (size - 2))
+        return (-2);
+	i = square_begin(size, step);
 	tetr = *line;
 	len = 4;
 	if (c == 14)
 	{
 		i++;
-		while (tetr[i] && len)
+		while (tetr[i] == '.' && len)
 		{
-			if (tetr[i] == '.')
-			{
-				tetr[i] = 'E';
-				len--;
-			}
+			tetr[i] = '#';
+			len--;
 			if (len == 2)
 				--i;
 			else
@@ -142,13 +129,10 @@ int	vert_e(int c, int size, int *step, char **line)
 	}
 	if (c == 15)
 	{
-		while (tetr[i] && len)
+		while (tetr[i]=='.' && len)
 		{
-			if (tetr[i] == '.')
-			{
-				tetr[i] = 'E';
-				len--;
-			}
+			tetr[i] = '#';
+			len--;
 			if (len == 2)
 				i++;
 			else
@@ -160,26 +144,25 @@ int	vert_e(int c, int size, int *step, char **line)
 	return (-1);
 }
 
-int	hor_f(int c, int size, int *step, char **line)
+int	hor_f(int c, int size, int step, char **line)
 {
 	char *tetr;
 	int i;
 	int len;
 
-	if (*step >= (size - 1) * (size - 2))
-		return (-1);
+	if (step >= (size - 1) * (size - 2))
+		return (-2);
 	tetr = *line;
 	len = 4;
-	i = hor_begin(size, *step);
-	printf("%d our i\n", i);
+	i = hor_begin(size, step);
 	if (c == 16 && tetr[i + size + 1] == '.')
 	{
-		tetr[i + size + 1] = 'F';
+		tetr[i + size + 1] = '#';
 		len--;
 	}
 	if (c == 17 && tetr[i + 1] == '.')
 	{
-		tetr[i + 1] = 'F';
+		tetr[i + 1] = '#';
 		len--;
 		i += size;
 	}
@@ -187,7 +170,7 @@ int	hor_f(int c, int size, int *step, char **line)
 	{
 		while (tetr[i] == '.' && len)
 		{
-			tetr[i++] = 'F';
+			tetr[i++] = '#';
 			len--;
 		}
 	}
@@ -196,26 +179,25 @@ int	hor_f(int c, int size, int *step, char **line)
 	return(-1);
 }
 
-int		vert_f(int c, int size, int *step, char **line)
+int		vert_f(int c, int size, int step, char **line)
 {
 	char	*tetr;
 	int		i;
 	int		len;
 
-	if (*step >= (size - 1) * (size - 2))
-		return (-1);
+	if (step >= (size - 1) * (size - 2))
+		return (-2);
 	tetr = *line;
 	len = 4;
-	i = square_begin(size, *step);
-	printf("%d our i\n", i);
+	i = square_begin(size, step);
 	if (c == 18 && tetr[i + size + 1] == '.')
 	{
-		tetr[i + size + 1] = 'F';
+		tetr[i + size + 1] = '#';
 		len--;
 	}
 	if (c == 19 && tetr[i + size] == '.')
 	{
-		tetr[i + size] = 'F';
+		tetr[i + size] = '#';
 		len--;
 		i++;
 	}
@@ -223,7 +205,7 @@ int		vert_f(int c, int size, int *step, char **line)
 	{
 		while (tetr[i] == '.' && len)
 		{
-			tetr[i] = 'F';
+			tetr[i] = '#';
 			len--;
 			i += size;
 		}
