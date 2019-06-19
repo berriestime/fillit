@@ -6,15 +6,25 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 17:08:42 by selly             #+#    #+#             */
-/*   Updated: 2019/06/18 17:27:05 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/19 14:53:15 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/tetriminos.h"
 
-int		max_step(int c, int step, int size)
+int		check_place(char **tetr, int i, int type, int step)
 {
-	if ((c == 1 || c == 2) && step > (size - 4 + 1) * size)
-		return (1);
-	return (0);
+	char	*tmp;
+	int		len;
+
+	len = 4;
+	type == 1 || type == 2 ? len : len--;
+	tmp = *tetr;
+	while(len && tmp[i] == '.')
+	{
+		tmp[i] = '#';
+		i += step;
+		len--;
+	}
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:45:26 by selly             #+#    #+#             */
-/*   Updated: 2019/06/18 17:27:08 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/19 14:57:56 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,15 @@ int		hor_g(int c, int size, int step, char **line)
 	}
 	if (len == 3)
 	{
-		 while (tetr[i] && len)
-                {
-                        if (tetr[i] == '.')
-                                tetr[i] = '#';
-                        else
-                                return (-1);
-                        i++;
-                        len--;
-                }
-                return (1);
-
+		len = check_place(&(*line), i, c, 1);
+		// while (tetr[i] == '.'  && len)
+          //      {
+			//		tetr[i] = '#';
+			//		i++;
+			//		len--;
+              //  }
+		 if (len == 0)
+			 return (1);
 	}
 	return (-1);
 }
@@ -96,25 +94,18 @@ int	vert_g(int c, int size, int step, char **line)
 	}
 	if (len == 3)
 	{
-		while (tetr[i] && len)
-		{
-			if (tetr[i] == '.')
-				tetr[i] = '#';
-			else
-				return (-1);
-			i += size;
-			len--;
-		}
-		return (1);
+		len = check_place(&(*line), i, c, size);
+		if (len == 0)
+			return (1);
 	}
 	return (-1);
 }
 
-int	square(int size, int step, char **line)
+int		square(int size, int step, char **line)
 {
-	char *tetr;
-	int	i;
-	int	b;
+	char	*tetr;
+	int		i;
+	int		b;
 
 	tetr = *line;
 	i = 0;
@@ -139,42 +130,28 @@ int	square(int size, int step, char **line)
 	return (-1);
 }
 
-int    line_type(int c, int size, int step, char **line)
+int		line_type(int c, int size, int step, char **line)
 {
-	char *tetron;
-	int i;
-	int len;
-	
+	int		i;
+	int		len;
+
 	i = 0;
-	max_step(c, step, size) == 1 ? return (-2) : len = 4;
-	tetron = *line;
+	len = 4;
+	if ((c == 1 || c == 2) && step > (size - 4 + 1) * size)
+		return (-2);
 	i = line_begin(c, size, step);
     if (c == 1)
-    {
-        while (tetron[i] == '.' && len)
-         {
-			 tetron[i] = '#';
-			 i += size;
-			 len--;
-		 } 
-    }
+		len = check_place(&(*line), i, c, size);
     if (c == 2)
-    {
-        while (len && tetron[i] == '.')
-		{
-			tetron[i] = '#';
-			i++;
-			len--;
-		}
-	}
+		len = check_place(&(*line), i, c, 1);
 	if (len == 0)
 		return (1);
     return (-1);
 }
 
-int figura(char c, int size, int step, char **line)
+int		figura(char c, int size, int step, char **line)
 {
-	int a;
+	int		a;
 	
 	a = 0;
 	if (c == 1 || c == 2)

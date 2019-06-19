@@ -6,7 +6,7 @@
 /*   By: dmorrige <dmorrige@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 08:21:13 by dmorrige          #+#    #+#             */
-/*   Updated: 2019/06/18 17:27:10 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/19 15:00:33 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int				vert_e(int c, int size, int step, char **line);
 int				hor_f(int c, int size, int step, char **line);
 int				vert_f(int c, int size, int step, char **line);
 int				line_begin(int c, int size, int step);
-int				max_step(int c, int step, int size);
+int				check_place(char **tetr, int i, int type, int step);
 void			output(char *s, int size);
 void			tetr_line(int *c, int size, int step);
 
