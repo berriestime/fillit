@@ -6,15 +6,17 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:46:14 by selly             #+#    #+#             */
-/*   Updated: 2019/06/18 17:18:58 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/24 16:04:49 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	hor_begin(int size, int step)
+#include "../includes/tetriminos.h"
+
+int			hor_begin(int size, int step)
 {
-	int i;
-	int b;
-	int m;
+	int		i;
+	int		b;
+	int		m;
 
 	i = 0;
 	b = 0;
@@ -36,55 +38,45 @@ int	hor_begin(int size, int step)
 	return (i);
 }
 
-int    square_begin(int size, int step)
+int			square_begin(int size, int step)
 {
-        int i;
-        int b;
-        int m;
+	int		i;
+	int		b;
+	int		m;
 
-        i = 0;
-        b = 0;
-        m = 0;
-        while (m < step)
-        {
-                if (i < (size - 1) + b - 1)
-                {
-                        m++;
-                        i++;
-                }
-                else
-                {
-                        i = i + 2;
-                        b += size;
-                        m++;
-                }
-        }
-        return (i);
+	i = 0;
+	b = 0;
+	m = 0;
+	while (m < step)
+	{
+		if (i < (size - 1) + b - 1)
+		{
+			m++;
+			i++;
+		}
+		else
+		{
+			i = i + 2;
+			b += size;
+			m++;
+		}
+	}
+	return (i);
 }
 
-int	hor_e(int c, int size, int step, char **line)
+int			hor_e(int c, int size, int step, char **line)
 {
-	char *tetr;
-	int i;
-	int len;
+	char	*tetr;
+	int		i;
+	int		len;
 
 	tetr = *line;
 	len = 4;
 	if (step >= (size - 1) * (size - 2))
-			return (-2);
+		return (-2);
 	i = hor_begin(size, step);
 	if (c == 12)
-	{
-		while (tetr[i] == '.' && len)
-		{
-			tetr[i] = '#';
-			len--;
-			if (len == 2)
-			i += size;
-			else
-			 i++;
-		}
-	}
+		len = check_e(&(*line), i, 1, size);
 	if (c == 13)
 	{
 		i += size;
@@ -98,38 +90,25 @@ int	hor_e(int c, int size, int step, char **line)
 				i++;
 		}
 	}
-	if (len == 0)
-		return (1);
-	return (-1);
+	return (len == 0 ? 1 : -1);
 }
 
-int	vert_e(int c, int size, int step, char **line)
+int			vert_e(int c, int size, int step, char **line)
 {
-	char *tetr;
-	int i;
-	int len;
+	char	*tetr;
+	int		i;
+	int		len;
 
 	if (step >= (size - 1) * (size - 2))
-        return (-2);
+		return (-2);
 	i = square_begin(size, step);
 	tetr = *line;
 	len = 4;
 	if (c == 14)
-	{
-		i++;
-		while (tetr[i] == '.' && len)
-		{
-			tetr[i] = '#';
-			len--;
-			if (len == 2)
-				--i;
-			else
-				i += size;
-		}
-	}
+		len = check_e(&(*line), i + 1, size, -1);
 	if (c == 15)
 	{
-		while (tetr[i]=='.' && len)
+		while (tetr[i] == '.' && len)
 		{
 			tetr[i] = '#';
 			len--;
@@ -139,16 +118,14 @@ int	vert_e(int c, int size, int step, char **line)
 				i += size;
 		}
 	}
-	if (len == 0)
-		return (1);
-	return (-1);
+	return (len == 0 ? 1 : -1);
 }
 
-int	hor_f(int c, int size, int step, char **line)
+int			hor_f(int c, int size, int step, char **line)
 {
-	char *tetr;
-	int i;
-	int len;
+	char	*tetr;
+	int		i;
+	int		len;
 
 	if (step >= (size - 1) * (size - 2))
 		return (-2);
@@ -167,50 +144,6 @@ int	hor_f(int c, int size, int step, char **line)
 		i += size;
 	}
 	if (len == 3)
-	{
-		while (tetr[i] == '.' && len)
-		{
-			tetr[i++] = '#';
-			len--;
-		}
-	}
-	if (len == 0)
-		return (1);
-	return(-1);
-}
-
-int		vert_f(int c, int size, int step, char **line)
-{
-	char	*tetr;
-	int		i;
-	int		len;
-
-	if (step >= (size - 1) * (size - 2))
-		return (-2);
-	tetr = *line;
-	len = 4;
-	i = square_begin(size, step);
-	if (c == 18 && tetr[i + size + 1] == '.')
-	{
-		tetr[i + size + 1] = '#';
-		len--;
-	}
-	if (c == 19 && tetr[i + size] == '.')
-	{
-		tetr[i + size] = '#';
-		len--;
-		i++;
-	}
-	if (len == 3)
-	{
-		while (tetr[i] == '.' && len)
-		{
-			tetr[i] = '#';
-			len--;
-			i += size;
-		}
-	}
-	if (len == 0)
-		return (1);
-	return (-1);
+		len = check_place(&(*line), i, c, 1);
+	return (len == 0 ? 1 : -1);
 }

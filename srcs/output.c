@@ -6,7 +6,7 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:45:55 by selly             #+#    #+#             */
-/*   Updated: 2019/06/18 17:07:50 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/24 16:57:23 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ int		line_begin(int c, int size, int step)
 {
 	int		i;
 	int		m;
-	int		b;
 	int		a;
 
 	i = 0;
 	m = 0;
-	b = size - 4;
-	a = b;
+	a = size - 4;
 	while (m < step)
 	{
 		if (c == 1)
@@ -33,13 +31,22 @@ int		line_begin(int c, int size, int step)
 				i++;
 			else
 			{
-				i = i + size - b;
+				i = i + size - (size - 4);
 				a += size;
 			}
 		}
 		m++;
 	}
 	return (i);
+}
+
+int		do_step(char **line, char **solve, int step)
+{
+	char *tmp_s;
+
+	tmp_s = *solve;
+	tmp_s = ft_strcpy(*line, *solve);
+	return (++step);
 }
 
 void	output(char *s, int size)
