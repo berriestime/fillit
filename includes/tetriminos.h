@@ -6,7 +6,7 @@
 /*   By: dmorrige <dmorrige@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 08:21:13 by dmorrige          #+#    #+#             */
-/*   Updated: 2019/06/24 17:00:10 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/26 15:31:58 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int				check_e(char **line, int i, int step1, int step2);
 int				check_vertg(int c, int size, int i, char **line);
 int				check_horg(int c, int size, int i, char **line);
 int				do_step(char **line, char **solve, int step);
+int				last_step(int a, int flag, int step);
+int				remove_alpha(char **dest, char **line, int i);
 void			output(char *s, int size);
 void			tetr_line(int *c, int size, int step);
 

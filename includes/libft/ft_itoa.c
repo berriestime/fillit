@@ -3,68 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 18:24:17 by kturnips          #+#    #+#             */
-/*   Updated: 2019/04/13 18:54:43 by kturnips         ###   ########.fr       */
+/*   Created: 2019/04/27 16:03:36 by selly             #+#    #+#             */
+/*   Updated: 2019/05/08 14:55:07 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	memo(int n)
+static int			ft_delitel(int n)
 {
-	size_t	i;
+	int		result;
 
-	i = 2;
-	if (n < 0)
-		++i;
-	while (n / 10 != 0)
+	result = 1;
+	while (n)
 	{
-		++i;
+		result *= 10;
+		n--;
+	}
+	return (result);
+}
+
+static int			ft_chars(long n)
+{
+	int		i;
+
+	i = 0;
+	if (n < 0)
+	{
+		n = -n;
+		i++;
+	}
+	while (n > 0)
+	{
 		n /= 10;
+		i++;
 	}
 	return (i);
 }
 
-static char	*add_digits(char *new, int i, unsigned int bn, int n)
+static char			*ft_getarray(char *ar, int n, int chars, int a)
 {
-	int	flag;
+	if (n < 0)
+	{
+		chars--;
+		ar[a++] = '-';
+		n = -n;
+	}
+	while (chars--)
+	{
+		ar[a] = n / ft_delitel(chars) + '0';
+		a++;
+		n %= ft_delitel(chars);
+	}
+	ar[a] = '\0';
+	return (ar);
+}
 
-	flag = 1;
-	while ((n / 10) != 0)
+static char			*ft_max(int c)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	if (c == 0)
 	{
-		flag = flag * 10;
-		n /= 10;
+		new = ft_strnew(1);
+		*new = '0';
+		new[1] = '\0';
 	}
-	while (flag >= 1)
+	else
 	{
-		new[i++] = (bn / flag + '0');
-		bn = bn - (bn / flag) * flag;
-		flag = flag / 10;
+		new = ft_strnew(11);
+		new[0] = '-';
+		new[1] = '2';
+		new = ft_getarray(new, 147483648, 9, 2);
+		return (new);
 	}
-	new[i] = '\0';
 	return (new);
 }
 
-char		*ft_itoa(int n)
+char				*ft_itoa(int n)
 {
-	char			*new;
-	size_t			i;
-	unsigned int	bn;
+	int		chars;
+	char	*new;
 
-	new = (char *)(malloc(sizeof(char) * memo(n)));
-	if (new)
+	if (n == -2147483648 || n == 0)
+		new = ft_max(n);
+	else
 	{
-		i = 0;
-		bn = n;
-		if (n < 0)
-		{
-			bn = -n;
-			new[i++] = '-';
-		}
-		new = add_digits(new, i, bn, n);
-		return (new);
+		chars = ft_chars(n);
+		if (!(new = ft_strnew(chars)))
+			return (NULL);
+		new = ft_getarray(new, n, chars, 0);
 	}
-	return (NULL);
+	return (new);
 }

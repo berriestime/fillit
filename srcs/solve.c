@@ -6,7 +6,7 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:10:36 by selly             #+#    #+#             */
-/*   Updated: 2019/06/24 16:49:44 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/26 15:25:51 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,24 @@ int			line_tetr(int *c, char **solve, int size, int step)
 	while (i < m)
 	{
 		if ((n = figura(c[i], size, step, &line)) == 1)
+		{
+			step = last_step(i, 0, step);
 			step = full_solution(&line, &(*solve), &i);
+		}
 		else if (n == -1)
 			step = do_step(&line, &(*solve), step);
 		else if (n == -2)
 		{
-			free(line);
-			return (-1);
+			if (i != 0)
+			{
+				i--;
+				step = remove_alpha(&(*solve), &line, i);
+			}
+			else
+			{
+				free(line);
+				return (-1);
+			}
 		}
 	}
 	return (1);
@@ -82,10 +93,9 @@ void		tetr_line(int *c, int size, int step)
 	int		test;
 
 	test = 0;
-	if (!(solve = (char *)malloc(sizeof(char) * (size * size + 1))))
+	if (!(solve = ft_strnew(size * size)))
 		return ;
 	ft_memset(solve, '.', size * size);
-	solve[size * size] = '\0';
 	test = line_tetr(c, &solve, size, step);
 	if (test < 0)
 	{

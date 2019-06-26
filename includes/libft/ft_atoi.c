@@ -3,44 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/04 11:50:36 by kturnips          #+#    #+#             */
-/*   Updated: 2019/04/13 18:37:57 by kturnips         ###   ########.fr       */
+/*   Created: 2019/04/27 16:06:53 by selly             #+#    #+#             */
+/*   Updated: 2019/05/08 15:39:38 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_atoi_exceptions(int s)
+#include "libft.h"
+
+static int		is_space(char c)
 {
-	if (s == 1)
-		return (-1);
+	if (c == ' ' || c == '\n' || c == '\t')
+		return (1);
+	if (c == '\v' || c == '\f' || c == '\r')
+		return (1);
 	return (0);
 }
 
-int			ft_atoi(char *str)
+int				ft_atoi(char const *s)
 {
-	int				result;
-	int				s;
-	long int		n;
+	int		num;
+	int		sign;
 
-	s = 1;
-	while (*str == ' ' || *str == '0' || *str == '\t' || *str == '\v' ||
-			*str == '\n' || *str == '\r' || *str == '\f')
-		str++;
-	n = 0;
-	if ((*str == '-') || (*str == '+'))
+	num = 0;
+	sign = 1;
+	while (is_space(*s))
+		s++;
+	if (*s == '-')
 	{
-		if (*str == '-')
-			s = -1;
-		str++;
+		sign = -1;
+		s++;
 	}
-	while (*str >= '0' && *str <= '9')
+	if (*s == '+' && sign == 1)
+		s++;
+	while (*s >= '0' && *s <= '9' && num > -2147483648 && num < 2147483647)
 	{
-		n = n * 10 + (*str - '0');
-		if ((n * 10) / 10 != n)
-			return (ft_atoi_exceptions(s));
-		str++;
+		num = num * 10 + (*s - '0');
+		s++;
 	}
-	result = s * n;
-	return (result);
+	return (num * sign);
 }

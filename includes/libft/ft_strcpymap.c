@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strcpymap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/03 15:12:34 by selly             #+#    #+#             */
-/*   Updated: 2019/05/06 17:30:00 by selly            ###   ########.fr       */
+/*   Created: 2019/04/27 15:52:01 by selly             #+#    #+#             */
+/*   Updated: 2019/05/04 15:53:30 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(char const *haystack, char const *needle)
+char	**ft_strcpymap(char const *s, char **m, char c)
 {
-	char const *p_haystack;
-	char const *find;
+	int		i;
+	int		a;
 
-	if (!*needle)
-		return ((char *)haystack);
-	while (*haystack)
+	i = 0;
+	a = 0;
+	if (!s && !m)
+		return (NULL);
+	while (*s == c)
+		s++;
+	while (*s)
 	{
-		p_haystack = haystack;
-		find = needle;
-		while (*p_haystack && *find)
+		if (*s != c)
 		{
-			if (*p_haystack++ != *find)
-				break ;
-			else
-				find++;
+			m[i][a] = *s;
+			a++;
 		}
-		if (*find == '\0' || *find == 0)
-			return ((char *)haystack);
-		haystack++;
+		else if (*s == c && *(s + 1) != '\0' && *(s + 1) != c)
+		{
+			i++;
+			a = 0;
+		}
+		s++;
 	}
-	return (NULL);
+	return (m);
 }

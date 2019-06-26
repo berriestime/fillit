@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 15:28:46 by kturnips          #+#    #+#             */
-/*   Updated: 2019/04/05 17:05:45 by kturnips         ###   ########.fr       */
+/*   Created: 2019/05/03 14:01:52 by selly             #+#    #+#             */
+/*   Updated: 2019/05/05 16:22:11 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	unsigned char a;
+
+	a = (unsigned char)c;
+	write(fd, &a, 1);
 }

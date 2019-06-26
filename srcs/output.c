@@ -6,11 +6,41 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:45:55 by selly             #+#    #+#             */
-/*   Updated: 2019/06/24 16:57:23 by selly            ###   ########.fr       */
+/*   Updated: 2019/06/26 15:30:55 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/tetriminos.h"
+
+int     remove_alpha(char **dest, char **line, int i)
+{
+	char *alpha;
+	char *buf;
+	char *buf_dest;
+	
+	alpha = "ABCDEFGHIGHIJKLMNOPQRSTUVWXYZ";
+	buf = *line;
+	buf_dest = *dest;
+	while (*buf)
+	{
+		if (*buf == alpha[i])
+			*buf = '.';
+		buf++;
+	}
+	ft_strcpy(buf_dest, *line);
+	return (last_step(i, 1, 0) + 1);
+}
+
+int     last_step(int a, int flag, int step)
+{
+	static int steps[26];
+
+	if (flag == 0)
+		steps[a] = step;
+	if (flag == 1)
+		return (steps[a]);
+	return (1);
+}
 
 int		line_begin(int c, int size, int step)
 {

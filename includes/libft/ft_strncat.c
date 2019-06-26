@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/05 18:11:28 by kturnips          #+#    #+#             */
-/*   Updated: 2019/02/05 19:17:55 by kturnips         ###   ########.fr       */
+/*   Created: 2019/05/03 14:48:51 by selly             #+#    #+#             */
+/*   Updated: 2019/05/05 15:13:41 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strncat(char *dest, char *src, int nb)
-{
-	int index_d;
-	int index_s;
+#include "libft.h"
 
-	index_s = 0;
-	index_d = 0;
-	while (dest[index_d] != '\0')
-		index_d++;
-	while (src[index_s] != '\0' && index_s < nb)
+char	*ft_strncat(char *dest, char const *src, size_t len)
+{
+	int		i;
+	int		a;
+
+	i = 0;
+	a = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[a] != '\0' && len)
 	{
-		dest[index_d + index_s] = src[index_s];
-		index_s++;
+		dest[i] = src[a];
+		i++;
+		a++;
+		len--;
 	}
-	dest[index_d + index_s] = '\0';
+	dest[i] = '\0';
 	return (dest);
 }

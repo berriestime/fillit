@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 18:33:01 by kturnips          #+#    #+#             */
-/*   Updated: 2019/04/13 18:28:31 by kturnips         ###   ########.fr       */
+/*   Created: 2019/05/03 13:31:18 by selly             #+#    #+#             */
+/*   Updated: 2019/05/11 17:01:58 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, void const *src, size_t n)
 {
-	size_t i;
+	unsigned char		*dest_p;
+	unsigned const char	*src_p;
 
-	i = 0;
-	if (len != 0)
+	dest_p = (unsigned char *)dest;
+	src_p = (unsigned const char *)src;
+	if (dest_p <= src_p)
 	{
-		if (dst > src)
+		while (n--)
 		{
-			while (len-- != 0)
-				((unsigned char *)dst)[len] = ((unsigned char *)src)[len];
-		}
-		else
-		{
-			while (i < len)
-			{
-				((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-				++i;
-			}
+			*dest_p = *src_p;
+			dest_p++;
+			src_p++;
 		}
 	}
-	return (dst);
+	else
+	{
+		dest_p += n;
+		src_p += n;
+		while (n--)
+			*--dest_p = *--src_p;
+	}
+	return ((void *)dest);
 }
