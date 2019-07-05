@@ -19,12 +19,13 @@ SRCS = srcs/additional.c		\
 	   srcs/output.c			\
 	   srcs/solve.c				\
 	   srcs/tetrimino.c			\
-	   srcs/tetriminos_type.c
+	   srcs/tetriminos_type.c	\
+	   srcs/start_size.c
 
 FLAGS = -Wall -Wextra -Werror
 
 LFT = cd includes/libft
-BACK = cd /Users/selly/42/3_Fillit/selly
+BACK = cd ../..
 
 all: $(NAME)
 

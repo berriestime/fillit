@@ -72,10 +72,11 @@ int		line_begin(int c, int size, int step)
 
 int		do_step(char **line, char **solve, int step)
 {
-	char *tmp_s;
+	// char *tmp;
 
-	tmp_s = *solve;
-	tmp_s = ft_strcpy(*line, *solve);
+	// tmp = *solve;
+	// tmp = ft_strcpy(*line, *solve);
+	ft_strcpy(*line, *solve);
 	return (++step);
 }
 

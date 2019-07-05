@@ -85,7 +85,7 @@ int			check_square(char *str)
 	i = 0;
 	a = 0;
 	c = 0;
-	while (str[i] != '\0')
+	while (i < 20)
 	{
 		if (str[i] != '.' && str[i] != '#' && str[i] != '\n' && str[i] != '\0')
 			return (0);
@@ -95,7 +95,8 @@ int			check_square(char *str)
 			a++;
 		i++;
 	}
-	if (a > 0 && str[20] == '\n')
+	if ((a > 0 && str[20] == '\n' && c > 4) ||
+			(c == 4 && a == 4 && str[19] == '\n'))
 		return (a);
 	return (-1);
 }

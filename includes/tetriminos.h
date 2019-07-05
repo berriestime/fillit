@@ -45,5 +45,7 @@ int				last_step(int a, int flag, int step);
 int				remove_alpha(char **dest, char **line, int i);
 void			output(char *s, int size);
 void			tetr_line(int *c, int size, int step);
+int				count_tetr(int *c);
+int				start_size(int *m, int size);
 
 #endif

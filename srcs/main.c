@@ -65,7 +65,7 @@ void			ft_tetr_validation(int fd, int tetrs[MAX_TETRS + 1])
 	if (red_mem != 20 || len > 26)
 		ft_invalid_tetr();
 	tetrs[len + 1] = 0;
-	tetr_line(tetrs, 4, 0);
+	tetr_line(tetrs, start_size(tetrs, count_tetr(tetrs)), 0);
 }
 
 int				main(int argc, char const **argv)
