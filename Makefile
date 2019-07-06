@@ -20,24 +20,45 @@ SRCS = srcs/additional.c		\
 	   srcs/solve.c				\
 	   srcs/tetrimino.c			\
 	   srcs/tetriminos_type.c	\
-	   srcs/start_size.c
+	   srcs/start_size.c		\
+	   srcs/figures/square.c
 
+OBJS = $(patsubst srcs/%.c,objs/%.o,$(SRCS))
+OBJS_DIR = objs
+OBJS_DIR_FIGURES = objs/figures
+
+CC = clang
 FLAGS = -Wall -Wextra -Werror
+LFLAGS = -L./includes/libft -lft
+INCLUDES = -I./includes
 
-LFT = cd includes/libft
-BACK = cd ../..
+LIBFT = includes/libft/libft.a
+LFT_DIR = includes/libft
 
 all: $(NAME)
 
-$(NAME):
-	$(LFT) ; make all ; $(BACK)
-	gcc -o $(NAME) $(FLAGS) $(SRCS) -I/includes -L./includes/libft -lft
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) $(FLAGS) $(INCLUDES) $(LFLAGS)
+
+$(LIBFT):
+	$(MAKE) -C $(LFT_DIR)
+
+objs/%.o: srcs/%.c | $(OBJS_DIR) $(OBJS_DIR_FIGURES)
+	$(CC) -c -o $@ $< $(FLAGS) $(INCLUDES)
+
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
+
+$(OBJS_DIR_FIGURES):
+	mkdir -p $(OBJS_DIR_FIGURES)
 
 clean:
-	$(LFT) ; make clean ; $(BACK)
+	$(MAKE) clean -C $(LFT_DIR)
+	rm -rf $(OBJS_DIR_FIGURES)
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
+	$(MAKE) fclean -C $(LFT_DIR)
 	rm -rf $(NAME)
-	$(LFT) ; make fclean ; $(BACK)
 
 re: fclean all
