@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetriminos.h"
+#include "tetriminos.h"
 
 int			check_place(char **tetr, int i, int type, int step)
 {

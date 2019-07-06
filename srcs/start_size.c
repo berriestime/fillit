@@ -1,4 +1,4 @@
-#include "../includes/tetriminos.h"
+#include "tetriminos.h"
 
 int	start_size(int *m, int size)
 {

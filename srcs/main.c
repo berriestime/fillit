@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetriminos.h"
+#include "tetriminos.h"
 
 int				check_symbol(char *s, int l, int st, int i)
 {

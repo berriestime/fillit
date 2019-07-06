@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetriminos.h"
+#include "figures.h"
+#include "tetriminos.h"
 
 int			hor_g(int c, int size, int step, char **line)
 {
@@ -68,33 +69,6 @@ int			vert_g(int c, int size, int step, char **line)
 	if (len == 3)
 		len = check_place(&(*line), i, c, size);
 	return (len == 0 ? 1 : -1);
-}
-
-int			square(int size, int step, char **line)
-{
-	char	*tetr;
-	int		i;
-	int		b;
-
-	tetr = *line;
-	i = 0;
-	if (step > (size - 1) * (size - 1))
-		return (-2);
-	i = square_begin(size, step);
-	b = 4;
-	while (tetr[i] && b)
-	{
-		if (tetr[i] == '.')
-			tetr[i] = '#';
-		else
-			return (-1);
-		if (b == 3)
-			i += size - 1;
-		else
-			i++;
-		b--;
-	}
-	return (b == 0 ? 1 : -1);
 }
 
 int			line_type(int c, int size, int step, char **line)

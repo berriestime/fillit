@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetriminos.h"
-#include <stdio.h>
+#include "tetriminos.h"
 
 int		type_f(char *s, int i, int l, int t)
 {

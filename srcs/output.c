@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetriminos.h"
+#include "tetriminos.h"
 
 int     remove_alpha(char **dest, char **line, int i)
 {

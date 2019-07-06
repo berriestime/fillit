@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tetriminos.h"
+#include "tetriminos.h"
 
 int			hor_begin(int size, int step)
 {
@@ -31,32 +31,6 @@ int			hor_begin(int size, int step)
 		else
 		{
 			i += 3;
-			b += size;
-			m++;
-		}
-	}
-	return (i);
-}
-
-int			square_begin(int size, int step)
-{
-	int		i;
-	int		b;
-	int		m;
-
-	i = 0;
-	b = 0;
-	m = 0;
-	while (m < step)
-	{
-		if (i < (size - 1) + b - 1)
-		{
-			m++;
-			i++;
-		}
-		else
-		{
-			i = i + 2;
 			b += size;
 			m++;
 		}
