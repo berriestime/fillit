@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   square.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorrige <dmorrige@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/06 12:03:34 by dmorrige          #+#    #+#             */
-/*   Updated: 2019/07/06 12:38:50 by dmorrige         ###   ########.fr       */
+/*   Created: 2019/07/06 17:17:26 by selly             #+#    #+#             */
+/*   Updated: 2019/07/06 17:25:12 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int			square(int size, int step, char **line)
 	}
 	return (b == 0 ? 1 : -1);
 }
-
+/**
+ * This function find start of  
+ *
+ **/
 int			square_begin(int size, int step)
 {
 	int		i;

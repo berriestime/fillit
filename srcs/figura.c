@@ -6,7 +6,7 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:20:33 by selly             #+#    #+#             */
-/*   Updated: 2019/06/26 15:20:43 by selly            ###   ########.fr       */
+/*   Updated: 2019/07/06 18:11:31 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,28 +88,26 @@ int			line_type(int c, int size, int step, char **line)
 	return (len == 0 ? 1 : -1);
 }
 
-int			figura(char c, int size, int step, char **line)
+int			figura(char tetr, int size_square, int step, char **buff)
 {
-	int		a;
+	int		res;
 
-	a = 0;
-	if (c == 1 || c == 2)
-		a = line_type(c, size, step, &(*line));
-	if (c == 3)
-		a = square(size, step, &(*line));
-	if (c > 3 && c < 8)
-		a = vert_g(c, size, step, &(*line));
-	if (c > 7 && c < 12)
-		a = hor_g(c, size, step, &(*line));
-	if (c == 12 || c == 13)
-		a = hor_e(c, size, step, &(*line));
-	if (c == 14 || c == 15)
-		a = vert_e(c, size, step, &(*line));
-	if (c == 16 || c == 17)
-		a = hor_f(c, size, step, &(*line));
-	if (c == 18 || c == 19)
-		a = vert_f(c, size, step, &(*line));
-	if (c < 0 && c > 19)
-		return (-1);
-	return (a);
+	res = 0;
+	if (tetr == 1 || tetr == 2)
+		res  = line_type(tetr, size_square, step, &(*buff));
+	if (tetr == 3)
+		res = square(size_square, step, &(*buff));
+	if (tetr > 3 && tetr < 8)
+		res = vert_g(tetr, size_square, step, &(*buff));
+	if (tetr > 7 && tetr < 12)
+		res = hor_g(tetr, size_square, step, &(*buff));
+	if (tetr == 12 || tetr == 13)
+		res = hor_e(tetr, size_square, step, &(*buff));
+	if (tetr == 14 || tetr == 15)
+		res = vert_e(tetr, size_square, step, &(*buff));
+	if (tetr == 16 || tetr == 17)
+		res = hor_f(tetr, size_square, step, &(*buff));
+	if (tetr == 18 || tetr == 19)
+		res = vert_f(tetr, size_square, step, &(*buff));
+	return (res);
 }

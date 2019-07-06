@@ -6,7 +6,7 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:10:36 by selly             #+#    #+#             */
-/*   Updated: 2019/06/26 15:25:51 by selly            ###   ########.fr       */
+/*   Updated: 2019/07/06 18:11:33 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ char		*fill_alpha(char *dest, char **line, int i)
 	return (ft_strcpy(dest, *line));
 }
 
-int			count_tetr(int *c)
+int			count_tetr(int *figures)
 {
 	int		i;
 
 	i = 0;
-	while (c[i] > 0 && c[i] < 20)
+	while (figures[i] > 0 && figures[i] < 20)
 		i++;
 	return (i);
 }
@@ -48,38 +48,38 @@ int			full_solution(char **line, char **solve, int *i)
 	return (0);
 }
 
-int			line_tetr(int *c, char **solve, int size, int step)
+int			line_tetr(int *figures, char **solution, int size, int step)
 {
 	int		i;
-	char	*line;
-	int		n;
-	int		m;
+	char	*buff;
+	int		flag;
+	int		max_tetrs;
 
 	i = 0;
-	n = 0;
-	if (!(line = ft_strnew(size * size)))
-		return (-3);
-	ft_memset(line, '.', size * size);
-	m = count_tetr(c);
-	while (i < m)
+	flag = 0;
+	if (!(buff = ft_strnew(size * size)))
+		ft_invalid_tetr();
+	ft_memset(buff, '.', size * size);
+	max_tetrs = count_tetr(c);
+	while (i < max_tetrs)
 	{
-		if ((n = figura(c[i], size, step, &line)) == 1)
+		if ((flag = figura(c[i], size, step, &buff)) == 1)
 		{
 			step = last_step(i, 0, step);
-			step = full_solution(&line, &(*solve), &i);
+			step = full_solution(&buff, &(*solve), &i);
 		}
-		else if (n == -1)
-			step = do_step(&line, &(*solve), step);
-		else if (n == -2)
+		else if (flag == -1)
+			step = do_step(&buff, &(*solve), step);
+		else if (flag == -2)
 		{
 			if (i != 0)
 			{
 				i--;
-				step = remove_alpha(&(*solve), &line, i);
+				step = remove_alpha(&(*solve), &buff, i);
 			}
 			else
 			{
-				free(line);
+				free(buff);
 				return (-1);
 			}
 		}
@@ -87,26 +87,26 @@ int			line_tetr(int *c, char **solve, int size, int step)
 	return (1);
 }
 
-void		tetr_line(int *c, int size, int step)
+void		solve(int *figures, int size_square, int step)
 {
-	char	*solve;
-	int		test;
+	char	*solution;
+	int		flag;
 
-	test = 0;
-	if (!(solve = ft_strnew(size * size)))
-		return ;
-	ft_memset(solve, '.', size * size);
-	test = line_tetr(c, &solve, size, step);
-	if (test < 0)
+	flag = 0;
+	if (!(solution = ft_strnew(size_square * size_square)))
+		ft_invalid_tetr();
+	ft_memset(solution, '.', size_square * size_square);
+	flag = line_tetr(figures, &solution, size_square, step);
+	if (flag < 0)
 	{
 		free(solve);
 		solve = NULL;
-		tetr_line(c, (size + 1), 0);
+		solve(figures, (size + 1), 0);
 	}
 	else
 	{
-		output(solve, size);
-		free(solve);
+		output(solution, size);
+		free(solution);
 		solve = NULL;
 	}
 }
