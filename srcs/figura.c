@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   figura.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dmorrige <dmorrige@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:20:33 by selly             #+#    #+#             */
-/*   Updated: 2019/07/06 18:11:31 by selly            ###   ########.fr       */
+/*   Updated: 2019/07/08 14:59:40 by dmorrige         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			hor_g(int c, int size, int step, char **line)
 		len--;
 		i += size;
 	}
-	if (len == 3 && i > 0)
+	if (len == 3 && i != -1)
 		len = check_place(&(*line), i, c, 1);
 	return (len == 0 ? 1 : -1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: dmorrige <dmorrige@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:10:36 by selly             #+#    #+#             */
-/*   Updated: 2019/07/06 18:11:33 by selly            ###   ########.fr       */
+/*   Updated: 2019/07/08 16:01:42 by dmorrige         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,22 @@ int			line_tetr(int *figures, char **solution, int size, int step)
 	if (!(buff = ft_strnew(size * size)))
 		ft_invalid_tetr();
 	ft_memset(buff, '.', size * size);
-	max_tetrs = count_tetr(c);
+	max_tetrs = count_tetr(figures);
 	while (i < max_tetrs)
 	{
-		if ((flag = figura(c[i], size, step, &buff)) == 1)
+		if ((flag = figura(figures[i], size, step, &buff)) == 1)
 		{
 			step = last_step(i, 0, step);
-			step = full_solution(&buff, &(*solve), &i);
+			step = full_solution(&buff, &(*solution), &i);
 		}
 		else if (flag == -1)
-			step = do_step(&buff, &(*solve), step);
+			step = do_step(&buff, &(*solution), step);
 		else if (flag == -2)
 		{
 			if (i != 0)
 			{
 				i--;
-				step = remove_alpha(&(*solve), &buff, i);
+				step = remove_alpha(&(*solution), &buff, i);
 			}
 			else
 			{
@@ -99,14 +99,14 @@ void		solve(int *figures, int size_square, int step)
 	flag = line_tetr(figures, &solution, size_square, step);
 	if (flag < 0)
 	{
-		free(solve);
-		solve = NULL;
-		solve(figures, (size + 1), 0);
+		free(solution);
+		solution = NULL;
+		solve(figures, (size_square + 1), 0);
 	}
 	else
 	{
-		output(solution, size);
+		output(solution, size_square);
 		free(solution);
-		solve = NULL;
+		solution = NULL;
 	}
 }
