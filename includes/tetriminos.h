@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tetriminos.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorrige <dmorrige@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: dmorrige <dmorrige@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 08:21:13 by dmorrige          #+#    #+#             */
-/*   Updated: 2019/07/08 15:29:55 by dmorrige         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:13:25 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ int				check_horg(int c, int size, int i, char **line);
 int				do_step(char **line, char **solve, int step);
 int				last_step(int a, int flag, int step);
 int				remove_alpha(char **dest, char **line, int i);
+int				fill_position(int *i, int step, char **solution, char **buff);
+int				full_solution(char **line, char **solve, int *i);
 void			output(char *s, int size);
-void			solve(int *figures, int size_square, int step);
+void			solve(int *c, int size_square);
+void			ft_invalid_tetr(void);
 int				count_tetr(int *c);
 int				start_size_of_square(int *m, int size);
-void			ft_invalid_tetr(void);
 
 #endif

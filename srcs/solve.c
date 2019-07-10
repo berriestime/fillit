@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorrige <dmorrige@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:10:36 by selly             #+#    #+#             */
-/*   Updated: 2019/07/08 16:01:42 by dmorrige         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:46:05 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,65 +48,57 @@ int			full_solution(char **line, char **solve, int *i)
 	return (0);
 }
 
-int			line_tetr(int *figures, char **solution, int size, int step)
+int			line_tetr(int *figures, char **solution, int size, char **buff)
 {
 	int		i;
-	char	*buff;
+	int		step;
 	int		flag;
 	int		max_tetrs;
 
 	i = 0;
-	flag = 0;
-	if (!(buff = ft_strnew(size * size)))
-		ft_invalid_tetr();
-	ft_memset(buff, '.', size * size);
+	step = 0;
 	max_tetrs = count_tetr(figures);
 	while (i < max_tetrs)
 	{
-		if ((flag = figura(figures[i], size, step, &buff)) == 1)
-		{
-			step = last_step(i, 0, step);
-			step = full_solution(&buff, &(*solution), &i);
-		}
+		if ((flag = figura(figures[i], size, step, &(*buff))) == 1)
+			step = fill_position(&i, step, &(*solution), &(*buff));
 		else if (flag == -1)
-			step = do_step(&buff, &(*solution), step);
+			step = do_step(&(*buff), &(*solution), step);
 		else if (flag == -2)
 		{
 			if (i != 0)
-			{
-				i--;
-				step = remove_alpha(&(*solution), &buff, i);
-			}
+				step = remove_alpha(&(*solution), &(*buff), --i);
 			else
-			{
-				free(buff);
 				return (-1);
-			}
 		}
 	}
 	return (1);
 }
 
-void		solve(int *figures, int size_square, int step)
+void		solve(int *figures, int size_square)
 {
 	char	*solution;
 	int		flag;
+	char	*buff;
 
 	flag = 0;
 	if (!(solution = ft_strnew(size_square * size_square)))
 		ft_invalid_tetr();
+	if (!(buff = ft_strnew(size_square * size_square)))
+		ft_invalid_tetr();
 	ft_memset(solution, '.', size_square * size_square);
-	flag = line_tetr(figures, &solution, size_square, step);
+	ft_memset(buff, '.', size_square * size_square);
+	flag = line_tetr(figures, &solution, size_square, &buff);
 	if (flag < 0)
 	{
-		free(solution);
-		solution = NULL;
-		solve(figures, (size_square + 1), 0);
+		ft_strdel(&solution);
+		ft_strdel(&buff);
+		solve(figures, (size_square + 1));
 	}
 	else
 	{
 		output(solution, size_square);
-		free(solution);
-		solution = NULL;
+		ft_strdel(&solution);
+		ft_strdel(&buff);
 	}
 }

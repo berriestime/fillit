@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   figura.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorrige <dmorrige@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:20:33 by selly             #+#    #+#             */
-/*   Updated: 2019/07/08 14:59:40 by dmorrige         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:42:15 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "figures.h"
 #include "tetriminos.h"
+
+int			fill_position(int *i, int step, char **solution, char **buff)
+{
+	step = last_step(*i, 0, step);
+	return (full_solution(&(*buff), &(*solution), &(*i)));
+}
 
 int			hor_g(int c, int size, int step, char **line)
 {
@@ -37,7 +43,7 @@ int			hor_g(int c, int size, int step, char **line)
 		len--;
 		i += size;
 	}
-	if (len == 3 && i != -1)
+	if (len == 3 && i > -1)
 		len = check_place(&(*line), i, c, 1);
 	return (len == 0 ? 1 : -1);
 }
@@ -94,7 +100,7 @@ int			figura(char tetr, int size_square, int step, char **buff)
 
 	res = 0;
 	if (tetr == 1 || tetr == 2)
-		res  = line_type(tetr, size_square, step, &(*buff));
+		res = line_type(tetr, size_square, step, &(*buff));
 	if (tetr == 3)
 		res = square(size_square, step, &(*buff));
 	if (tetr > 3 && tetr < 8)

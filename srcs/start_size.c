@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   start_size.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorrige <dmorrige@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/06 12:15:36 by dmorrige          #+#    #+#             */
-/*   Updated: 2019/07/08 14:59:10 by dmorrige         ###   ########.fr       */
+/*   Created: 2019/07/08 17:06:35 by selly             #+#    #+#             */
+/*   Updated: 2019/07/08 17:14:33 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetriminos.h"
 
-int	start_size_of_square(int *figures, int count_of_tetr)
+int		start_size_of_square(int *figures, int count_of_tetr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < count_of_tetr)

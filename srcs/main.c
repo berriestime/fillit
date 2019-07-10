@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorrige <dmorrige@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: selly <selly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 08:17:01 by dmorrige          #+#    #+#             */
-/*   Updated: 2019/07/08 14:59:07 by dmorrige         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:02:20 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void			ft_tetr_validation(int fd, int tetrs[MAX_TETRS + 1])
 	if (red_mem != 20 || len > 26)
 		ft_invalid_tetr();
 	tetrs[len + 1] = 0;
-	solve(tetrs, start_size_of_square(tetrs, count_tetr(tetrs)), 0);
+	solve(tetrs, start_size_of_square(tetrs, count_tetr(tetrs)));
 }
 
 int				main(int argc, char const **argv)

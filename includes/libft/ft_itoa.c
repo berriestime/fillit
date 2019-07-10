@@ -6,15 +6,15 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 16:03:36 by selly             #+#    #+#             */
-/*   Updated: 2019/05/08 14:55:07 by selly            ###   ########.fr       */
+/*   Updated: 2019/07/08 17:12:17 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			ft_delitel(int n)
+static int		ft_delitel(int n)
 {
-	int		result;
+	int			result;
 
 	result = 1;
 	while (n)
@@ -25,9 +25,9 @@ static int			ft_delitel(int n)
 	return (result);
 }
 
-static int			ft_chars(long n)
+static int		ft_chars(long n)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	if (n < 0)
@@ -43,7 +43,7 @@ static int			ft_chars(long n)
 	return (i);
 }
 
-static char			*ft_getarray(char *ar, int n, int chars, int a)
+static char		*ft_getarray(char *ar, int n, int chars, int a)
 {
 	if (n < 0)
 	{
@@ -61,10 +61,10 @@ static char			*ft_getarray(char *ar, int n, int chars, int a)
 	return (ar);
 }
 
-static char			*ft_max(int c)
+static char		*ft_max(int c)
 {
-	char	*new;
-	
+	char		*new;
+
 	if (c == 0)
 	{
 		new = ft_strnew(1);
@@ -82,10 +82,10 @@ static char			*ft_max(int c)
 	return (new);
 }
 
-char				*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
-	int		chars;
-	char	*new;
+	int			chars;
+	char		*new;
 
 	if (n == -2147483648 || n == 0)
 		new = ft_max(n);

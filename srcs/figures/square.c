@@ -6,7 +6,7 @@
 /*   By: selly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 17:17:26 by selly             #+#    #+#             */
-/*   Updated: 2019/07/06 17:25:12 by selly            ###   ########.fr       */
+/*   Updated: 2019/07/08 16:08:05 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ int			square(int size, int step, char **line)
 	}
 	return (b == 0 ? 1 : -1);
 }
-/**
- * This function find start of  
- *
- **/
+
 int			square_begin(int size, int step)
 {
 	int		i;
