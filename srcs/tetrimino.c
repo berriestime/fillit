@@ -6,7 +6,7 @@
 /*   By: selly <selly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 15:22:04 by selly             #+#    #+#             */
-/*   Updated: 2019/06/05 14:42:27 by selly            ###   ########.fr       */
+/*   Updated: 2019/07/10 19:01:14 by selly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			touch(char *str)
 	return (-1);
 }
 
-int			type_line_e(char *s, int i, int line, int step)
+int			type_e_vert(char *s, int i, int line, int step)
 {
 	int		flag;
 
@@ -71,7 +71,7 @@ int			type_e(char *s, int i, int line, int step)
 		return (12);
 	if (line == 0 && step == 3)
 		return (13);
-	if ((step = type_line_e(s, touch(s), 4, 0)) > 0)
+	if ((step = type_e_vert(s, touch(s), 4, 0)) > 0)
 		return (step);
 	return (-1);
 }
@@ -79,52 +79,52 @@ int			type_e(char *s, int i, int line, int step)
 int			check_square(char *str)
 {
 	int		i;
-	int		a;
-	int		c;
+	int		count_hash;
+	int		check_on_four_line;
 
 	i = 0;
-	a = 0;
-	c = 0;
+	count_hash = 0;
+	check_on_four_line = 0;
 	while (i < 20)
 	{
 		if (str[i] != '.' && str[i] != '#' && str[i] != '\n' && str[i] != '\0')
 			return (0);
 		if (str[i] == '\n')
-			c++;
+			check_on_four_line++;
 		if (str[i] == '#')
-			a++;
+			count_hash++;
 		i++;
 	}
-	if ((a > 0 && str[20] == '\n' && c > 4) ||
-			(c == 4 && a == 4 && str[19] == '\n'))
-		return (a);
+	if ((count_hash > 0 && str[20] == '\n' && check_on_four_line > 4) ||
+			(check_on_four_line == 4 && count_hash == 4 && str[19] == '\n'))
+		return (count_hash);
 	return (-1);
 }
 
 int			tetrimino(char *str)
 {
-	int		type;
+	int		type_tetr;
 	int		start;
-	int		line;
+	int		searching_hashes;
 
-	type = check_square(str);
+	type_tetr = check_square(str);
 	start = touch(str);
-	line = 4;
-	if (type == 4)
+	searching_hashes = 4;
+	if (type_tetr == 4)
 	{
-		type = -1;
-		type = type_a(str, start, line, type);
-		if (type <= 0)
-			type = type_b(str, start, line);
-		if (type <= 0)
-			type = type_c(str, start, line, type);
-		if (type <= 0)
-			type = type_d(str, start, line, type);
-		if (type <= 0)
-			type = type_f(str, start, line, type);
-		if (type <= 0)
-			type = type_e(str, start, line, 0);
-		return (type);
+		type_tetr = -1;
+		type_tetr = type_a(str, start, searching_hashes, type_tetr);
+		if (type_tetr <= 0)
+			type_tetr = type_b(str, start, searching_hashes);
+		if (type_tetr <= 0)
+			type_tetr = type_c(str, start, searching_hashes, type_tetr);
+		if (type_tetr <= 0)
+			type_tetr = type_d(str, start, searching_hashes, type_tetr);
+		if (type_tetr <= 0)
+			type_tetr = type_f(str, start, searching_hashes, type_tetr);
+		if (type_tetr <= 0)
+			type_tetr = type_e(str, start, searching_hashes, 0);
+		return (type_tetr);
 	}
 	return (-1);
 }
